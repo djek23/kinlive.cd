@@ -1,0 +1,41 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: kinlive-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-kinlive}
+      POSTGRES_USER: ${POSTGRES_USER:-kinlive}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change-me-in-production}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - kinlive-postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER:-kinlive} -d $${POSTGRES_DB:-kinlive}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: kinlive-app
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: postgresql://${POSTGRES_USER:-kinlive}:${POSTGRES_PASSWORD:-change-me-in-production}@postgres:5432/${POSTGRES_DB:-kinlive}
+      KINLIVE_SESSION_SECRET: ${KINLIVE_SESSION_SECRET:-change-this-session-secret-for-production}
+      KINLIVE_DOCUMENT_KEY: ${KINLIVE_DOCUMENT_KEY:-change-this-document-key-for-production}
+    ports:
+      - "${APP_PORT:-3000}:3000"
+    volumes:
+      - kinlive-data:/app/data
+
+volumes:
+  kinlive-postgres:
+  kinlive-data:

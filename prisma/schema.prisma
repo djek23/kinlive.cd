@@ -1,0 +1,148 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum AccountRole {
+  PRODUCER
+  SUPERADMIN
+}
+
+enum AccountStatus {
+  PENDING
+  ACTIVE
+  SUSPENDED
+}
+
+enum EventStatus {
+  PENDING
+  PUBLISHED
+}
+
+enum LiveStatus {
+  OFFLINE
+  LIVE
+  ENDED
+}
+
+enum SaleStatus {
+  PAID
+  PENDING
+  CANCELLED
+}
+
+model Account {
+  id                String        @id @default(cuid())
+  name              String
+  email             String        @unique
+  phone             String
+  passwordHash      String
+  role              AccountRole
+  status            AccountStatus @default(PENDING)
+  mustChangePassword Boolean      @default(false)
+  emailVerified     Boolean       @default(false)
+  twoFactorEnabled  Boolean       @default(false)
+  twoFactorSecret   String?
+  failedAttempts    Int           @default(0)
+  lockedUntil       DateTime?
+  ownerName         String?
+  city              String?
+  country           String?
+  rccm              String?
+  identityNumber    String?
+  contractAccepted  Boolean       @default(false)
+  contractAcceptedAt DateTime?
+  submittedAt       DateTime      @default(now())
+  reviewedAt        DateTime?
+  reviewNote        String?
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+  events            Event[]
+  sales             Sale[]
+  documents         Document[]
+  auditEntries      AuditEntry[]
+}
+
+model Document {
+  id          String   @id @default(cuid())
+  accountId   String
+  account     Account  @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  kind        String
+  originalName String
+  encryptedPath String
+  mimeType    String
+  size        Int
+  verified    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+}
+
+model Event {
+  id          String      @id @default(cuid())
+  title       String
+  place       String
+  eventDate   DateTime?
+  dateLabel   String?
+  time        String?
+  price       String?
+  category    String?
+  image       String?
+  description String?
+  status      EventStatus @default(PENDING)
+  liveStatus  LiveStatus  @default(OFFLINE)
+  producerId  String
+  producer    Account     @relation(fields: [producerId], references: [id], onDelete: Cascade)
+  sales       Sale[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+model Sale {
+  id                String     @id @default(cuid())
+  code              String     @unique
+  codeHash          String     @unique
+  eventId           String
+  event             Event      @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  producerId        String
+  producer          Account    @relation(fields: [producerId], references: [id], onDelete: Cascade)
+  customerName      String
+  phone             String
+  email             String
+  ticketType        String
+  amount            Decimal    @db.Decimal(12, 2)
+  currency          String
+  paymentMethod     String
+  status            SaleStatus @default(PAID)
+  quantity          Int        @default(1)
+  quantityRemaining Int        @default(1)
+  redeemedAt        DateTime?
+  usedAt            DateTime?
+  createdAt         DateTime   @default(now())
+}
+
+model Category {
+  id    String @id @default(cuid())
+  name  String @unique
+}
+
+model PaymentProvider {
+  id         String  @id
+  name       String
+  enabled    Boolean @default(false)
+  publicKey  String?
+  secretKey  String?
+  webhookUrl String?
+  updatedAt  DateTime @updatedAt
+}
+
+model AuditEntry {
+  id        String   @id @default(cuid())
+  action    String
+  detail    String
+  ip        String
+  accountId String?
+  account   Account? @relation(fields: [accountId], references: [id], onDelete: SetNull)
+  createdAt DateTime @default(now())
+}

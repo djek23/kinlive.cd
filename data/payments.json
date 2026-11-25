@@ -1,0 +1,34 @@
+[
+  {
+    "id": "orange",
+    "name": "Orange Money",
+    "enabled": false,
+    "publicKey": "",
+    "secretKey": "",
+    "webhookUrl": ""
+  },
+  {
+    "id": "airtel",
+    "name": "Airtel Money",
+    "enabled": false,
+    "publicKey": "",
+    "secretKey": "",
+    "webhookUrl": ""
+  },
+  {
+    "id": "mpesa",
+    "name": "M-Pesa",
+    "enabled": false,
+    "publicKey": "",
+    "secretKey": "",
+    "webhookUrl": ""
+  },
+  {
+    "id": "card",
+    "name": "Carte bancaire",
+    "enabled": false,
+    "publicKey": "",
+    "secretKey": "",
+    "webhookUrl": ""
+  }
+]

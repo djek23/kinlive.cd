@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1320 430" role="img" aria-label="Kinlive.cd">
+  <rect width="1320" height="430" fill="none"/>
+  <g fill="#C99700">
+    <path d="M20 390V190h70v112l92-112h86l-96 112 112 88h-92l-102-82v82H20z"/>
+    <path d="M268 390V205h70v185h-70zm35-208a39 39 0 1 1 0-78 39 39 0 0 1 0 78z"/>
+    <path d="M368 390V205h68v24c18-20 42-31 74-31 58 0 96 39 96 103v89h-70v-82c0-34-18-53-49-53-34 0-50 21-50 58v77h-69z"/>
+  </g>
+  <g transform="translate(626 0)">
+    <rect x="0" y="395" width="105" height="12" rx="2" fill="#C99700"/>
+    <rect x="43" y="124" width="38" height="272" rx="3" fill="#C99700"/>
+    <path d="M43 124h38l-5-30H48z" fill="#C99700"/>
+    <rect x="48" y="82" width="28" height="42" rx="4" fill="#C99700"/>
+    <rect x="51" y="58" width="22" height="25" rx="3" fill="#C99700"/>
+    <path d="M62 58V8" stroke="#C99700" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="62" cy="6" r="10" fill="#C99700"/>
+    <rect x="21" y="174" width="83" height="13" rx="3" fill="#C99700"/>
+    <rect x="11" y="190" width="103" height="13" rx="3" fill="#C99700"/>
+    <rect x="0" y="207" width="125" height="13" rx="3" fill="#C99700"/>
+    <rect x="48" y="126" width="28" height="54" fill="#C99700"/>
+    <rect x="48" y="145" width="28" height="12" fill="#C99700"/>
+  </g>
+  <g fill="#C99700">
+    <path d="M760 390V205h68v185h-68zm34-208a39 39 0 1 1 0-78 39 39 0 0 1 0 78z"/>
+    <path d="M851 205h70l48 116 49-116h68l-91 185h-51z"/>
+    <path d="M1080 298c0-61 45-101 103-101 60 0 99 40 99 101v15h-132c5 23 23 36 49 36 19 0 35-7 48-19l37 40c-22 22-53 33-90 33-65 0-114-39-114-105zm70-18h62c-5-20-14-31-31-31-16 0-27 11-31 31z"/>
+  </g>
+  <g fill="#C99700">
+    <circle cx="1292" cy="376" r="12"/>
+  </g>
+  <text x="1010" y="402" fill="#C99700" font-family="Arial, Helvetica, sans-serif" font-size="58" font-weight="800">.cd</text>
+</svg>

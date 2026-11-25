@@ -1,26 +1,45 @@
 @import "tailwindcss";
 
+@keyframes loading {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(300%); }
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0a0a0a;
+  --foreground: #f4efe8;
+  --brand-yellow: #c69200;
+  --brand-ivory: #f4efe8;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 body {
+  margin: 0;
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+button, a, input { font: inherit; }
+button, a { cursor: pointer; }
+button { border: 0; }
+::selection { background: var(--brand-yellow); color: var(--background); }
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--background); }
+::-webkit-scrollbar-thumb { background: var(--brand-yellow); border-radius: 999px; }
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { scrollbar-width: none; }
+
+/* Palette globale Kinlive : noir, jaune vif, ivoire */
+[class*="bg-[#ff7a00]"],
+[class*="from-[#ff7a00]"],
+[class*="to-[#ff7a00]"] { background-color: var(--brand-yellow); }
+[class*="text-[#ff7a00]"] { color: var(--brand-yellow); }
+[class*="border-[#ff7a00]"] { border-color: var(--brand-yellow); }
+[class*="accent-[#ff7a00]"] { accent-color: var(--brand-yellow); }
+[class*="bg-[#ff3131]"] { background-color: #b88600; }
+[class*="text-[#ef233c]"] { color: var(--brand-yellow); }
+[class*="bg-[#ef233c]"] { background-color: var(--brand-yellow); }
+[class*="bg-[#111111]"] { background-color: var(--background); }
+[class*="bg-[#191919]"],
+[class*="bg-[#1a1a1a]"] { background-color: #171717; }
