@@ -1,7 +1,7 @@
 "use client";
 
 import { useLocale } from "../components/LocaleProvider";
-export const dynamic = "force-dynamic";
+
 
 export default function AProposPage() {
   const { t } = useLocale();
